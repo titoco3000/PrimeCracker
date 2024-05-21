@@ -1,4 +1,10 @@
+#ifndef LISTA_H
+#define LISTA_H
+
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 typedef struct ItemLista
 {
     void *conteudo;
@@ -96,19 +102,45 @@ int Lista_contar(Lista *lista){
     return n;
 }
 
+int Lista_obter_index(Lista *lista, ItemLista* busca){
+    int i = 0;
+    Lista_for_item_em(lista){
+        if(item == busca)
+            return i;
+        i++;
+    }
+    return -1;
+}
+
+
+static void teste_liberar_cada_item(void* arg){
+    free(arg);
+}
 void teste_lista()
 {
+    //cria lista
     Lista lista = Lista_new();
-    Lista_inserir(&lista, (void *)0);
-    Lista_inserir(&lista, (void *)1);
-    Lista_inserir(&lista, (void *)2);
+    
+    //aloca valores
+    char *s1 = malloc(sizeof(char)*20);
+    strcpy(s1, "string1");
+    char *s2 = malloc(sizeof(char)*20);
+    strcpy(s2, "string2");
+    char *s3 = malloc(sizeof(char)*20);
+    strcpy(s3, "string3");
+    
+    //insere na lista
+    Lista_inserir(&lista, (void *)s1);
+    Lista_inserir(&lista, (void *)s2);
+    Lista_inserir(&lista, (void *)s3);
 
-    ItemLista *item_encontrado = Lista_procurar((&lista), item->conteudo == (void *)42);
+    ItemLista *item_encontrado = Lista_procurar((&lista), strcmp(item->conteudo, "string2")==0);
 
-    printf("Item encontrado: %lld\n", (long long)item_encontrado);
+    printf("Item encontrado no index %d\n", Lista_obter_index(&lista, item_encontrado));
 
     Lista_for_item_em((&lista))
-        printf("%lld\n", (long long)item->conteudo);
+        printf("%s\n", (char*)item->conteudo);
 
-    Lista_liberar(&lista, 0);
+    Lista_liberar(&lista, teste_liberar_cada_item);
 }
+#endif
