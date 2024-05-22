@@ -443,7 +443,7 @@ void iniciar_distribuicao(char *input)
                 printf("%llu x %llu = %llu\n", num1, num2, num1*num2);
             }
             else if(input_buffer[0] == 'c'){
-                printf("Numero: ");
+                printf("Digite um numero que tenhas dois fatores primos até %llu: ",Primos_obter_no_index(primos, 2999)*Primos_obter_no_index(primos, 2999));
                 ull num;
                 scanf("%llu",&num);
                 int qtd_nodes = Lista_contar(&lista_de_nodes);
