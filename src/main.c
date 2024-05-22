@@ -7,12 +7,20 @@ Calcula todas as multiplicações de (inicio a fim) * (1 a N)
 
 #include <stdio.h>
 #include "distribuicao.h"
-int main()
+int main(int argc, char **argv)
 {
-    char ip_buffer[100];
+    int lider_automatico = 0;
+    if(argc>1){
+        if(argv[1][0] == '-' && argv[1][1] == 'l')
+            iniciar_distribuicao("");   
+        else
+            iniciar_distribuicao(argv[1]);
+    }
+    else{
+        char ip_buffer[100];
 
-    printf("Se já tem alguma outra máquina na rede, digite o IP dela (vazio caso não tenha): ");
-    obter_input(ip_buffer);
-    iniciar_distribuicao(ip_buffer);
-
+        printf("Se já tem alguma outra máquina na rede, digite o IP dela (vazio caso não tenha): ");
+        obter_input(ip_buffer);
+        iniciar_distribuicao(ip_buffer);
+    }
 }
