@@ -30,7 +30,7 @@ Primos *Primos_abrir(char *arquivo)
 
     p->arquivo = 0;
     p->index = 0;
-    p->numbers_on_file = 3000;//30000;
+    p->numbers_on_file = 30000;
     return p;
 }
 
@@ -55,7 +55,7 @@ ull Primos_obter_no_index(Primos *p, int index)
 ull Primos_obter_primo_aleatorio(Primos *p)
 {
     ull max_num_index = p->numbers_on_file;
-    return Primos_obter_no_index(p, rand() % 1000);
+    return Primos_obter_no_index(p, rand() % p->numbers_on_file);
 }
 
 ull Primos_obter_proximo_primo(Primos *p)

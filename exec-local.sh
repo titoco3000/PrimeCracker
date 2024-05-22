@@ -39,8 +39,14 @@ sleep 0.3
 # Armazena clipboard numa variavel
 clipboard_content=$(xclip -o -selection clipboard)
 
+num_to_open=$((num_instances > 8 ? 8 : num_instances))
+
+if [ "$num_to_open" -lt "$num_instances" ]; then
+    echo "Número de instâncias foi reduzido para $num_to_open."
+fi
+
 # Abre numero especificado de terminais rodando o programa com com clipboard contents como args
-for ((i = 0; i < num_instances; i++))
+for ((i = 0; i < num_to_open; i++))
 do
     gnome-terminal -- bash -c "./build/primeCracker.exe \"$clipboard_content\""
 done
